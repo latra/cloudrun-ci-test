@@ -13,7 +13,6 @@ kind = 'event'
 def hello_world():
     if request.method == 'POST':
         r = requests.get(url = f"https://wave43-webhelp-pgallucci.oa.r.appspot.com/get/{request.form['key']}")
-        # extracting data in json format
         data = r.json()
         return render_template('display.html',
                                 table_data=data)  
