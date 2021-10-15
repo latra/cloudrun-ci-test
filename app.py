@@ -1,16 +1,23 @@
+
 import os
+import requests
+from flask.globals import request
 from google.cloud import datastore  
-from flask import Flask, jsonify
+from flask import Flask, json, jsonify, render_template
 
 app = Flask(__name__)
 datastore_client = datastore.Client()
-kind = 'hello_world'
+kind = 'event'
 
-@app.route("/")
+@app.route("/", methods=['GET','POST'])
 def hello_world():
-    key = datastore_client.key(kind,'the_data')
-    task = datastore_client.get(key)
-    return  jsonify(task)
+    if request.method == 'POST':
+        r = requests.get(url = f"https://wave43-webhelp-pgallucci.oa.r.appspot.com/get/{request.form['key']}")
+        # extracting data in json format
+        data = r.json()
+        return render_template('display.html',
+                                table_data=data)  
+    return  render_template('main.html')
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 80)))
