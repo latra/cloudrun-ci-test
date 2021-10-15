@@ -8,10 +8,10 @@
         </tr>
     </thead>
     <tbody>
-        {% for k in table_data.keys() %}
-            <tr>
+        <tr>
+            % for k in table_data.keys() %}
                 <td>{{table_data[k]}}</td>
-            </tr>
-        {% endfor %}
+            {% endfor %}
+        </tr>
     </tbody>
 </table>
