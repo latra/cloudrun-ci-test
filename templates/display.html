@@ -1,17 +1,20 @@
+{% extends "base.html" %}
 
-<table id="test-table" class="table display" cellspacing="0" width="100%">
+{% block content %}
+  <table id="data" class="table table-striped">
     <thead>
-        <tr>
-            {% for  k in table_data.keys() %}
-                <th scope="col">{{k}}</th>
-            {% endfor %}
-        </tr>
+      <tr>
+        {% for  k in table_data.keys() %}
+        <th scope="col">{{k}}</th>
+    {% endfor %}
+      </tr>
     </thead>
     <tbody>
         <tr>
-            % for k in table_data.keys() %}
+            {% for k in table_data.keys() %}
                 <td>{{table_data[k]}}</td>
             {% endfor %}
         </tr>
     </tbody>
-</table>
+  </table>
+{% endblock %}
